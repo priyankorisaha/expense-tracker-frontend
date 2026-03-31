@@ -1,7 +1,7 @@
 import React, { useContext, useMemo, useState } from 'react';
 import axios from 'axios';
 
-const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api/v1/';
+const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5001/api/v1/';
 
 const buildApi = (token) =>
     axios.create({
@@ -155,7 +155,15 @@ export const GlobalProvider = ({ children }) => {
             const response = await api.get('ai/budget-copilot');
             setBudgetCopilot(response.data);
         } catch (err) {
-            setError(err?.response?.data?.message || 'Unable to fetch budget copilot');
+            const msg = err?.response?.data?.message || 'Unable to fetch budget copilot';
+            setError(msg);
+            // fall back to safe default so UI does not stay stuck on loading
+            setBudgetCopilot({
+                healthScore: 0,
+                safeToSpend: 0,
+                categoryBudgets: [],
+                recommendations: [msg],
+            });
         }
     };
 

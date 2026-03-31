@@ -97,12 +97,30 @@ const AuthStyled = styled.div`
         padding: 0.8rem;
         border-radius: 0.5rem;
         border: 1px solid #ccc;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+
+        &:hover {
+            border-color: #222260;
+            box-shadow: 0 0 8px rgba(34, 34, 96, 0.2);
+            transform: translateY(-2px);
+        }
+
+        &:focus {
+            outline: none;
+            border-color: #222260;
+            box-shadow: 0 0 12px rgba(34, 34, 96, 0.3);
+        }
     }
 
     .row {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0.8rem;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
     }
 
     button {
@@ -112,12 +130,33 @@ const AuthStyled = styled.div`
         background: #222260;
         color: white;
         cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        font-size: 1rem;
+
+        &:hover {
+            background: #16213e;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(34, 34, 96, 0.3);
+        }
+
+        &:active {
+            transform: translateY(-1px);
+        }
     }
 
     .switch {
         background: transparent;
         color: #222260;
         text-decoration: underline;
+        padding: 0.5rem;
+
+        &:hover {
+            background: rgba(34, 34, 96, 0.05);
+            color: #16213e;
+            transform: none;
+            box-shadow: none;
+        }
     }
 
     p {

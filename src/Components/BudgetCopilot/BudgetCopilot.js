@@ -3,11 +3,15 @@ import styled from 'styled-components';
 import { useGlobalContext } from '../../context/globalContext';
 
 function BudgetCopilot() {
-    const { budgetCopilot, getBudgetCopilot } = useGlobalContext();
+    const { budgetCopilot, getBudgetCopilot, error } = useGlobalContext();
 
     useEffect(() => {
         getBudgetCopilot();
-    }, []);
+    }, [getBudgetCopilot]);
+
+    if (error) {
+        return <p style={{ color: 'red' }}>Unable to load AI budget copilot: {error}</p>;
+    }
 
     if (!budgetCopilot) {
         return <p>Loading AI budget copilot...</p>;
